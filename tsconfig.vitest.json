@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.app.json", // 继承了tsconfig.app.json的设置
+  "exclude": [],
+  "compilerOptions": {
+    "composite": true,
+    "lib": [],
+    "types": ["node", "jsdom"]
+  }
+}

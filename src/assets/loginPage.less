@@ -1,0 +1,204 @@
+.main {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: aqua;
+    width: 60vw;
+    height: 90vh;
+  }
+  .body {
+    width: 40vw;
+    height: 55vh;
+    margin-top: 10vh;
+    align-self: center;
+    background: beige !important;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .leftPart {
+    display: inline-block;
+    width: 45%;
+    height: 100%;
+    img {
+      border: 2px solid lightgrey;
+      border-radius: 1vh;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  input {
+    border-width: 0;
+    background: transparent;
+  }
+  .roundClass {
+    font-size: x-small;
+    width: 14vw;
+    display: flex;
+  }
+  .borderClass {
+    border: 1px solid rgb(129, 129, 129);
+    background: rgb(232, 240, 254);
+    border-radius: 3px;
+    padding: 2px 0;
+  }
+  .linkClass {
+    height: 2vh;
+    justify-content: center;
+    align-items: stretch;
+      img {
+      width: 2vh !important;
+      margin: 0 1vh;
+    }
+    a {
+      text-decoration: none;
+      font-weight: 700;
+      cursor: pointer;
+    }
+  }
+  .forgetClass {
+    font-size: xx-small;
+    font-weight: 100 !important;
+    color: rgb(0, 55, 107);
+    text-decoration: none !important;
+  }
+  .rightPart {
+    width: 45%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    .upper {
+      width: 100%;
+      background: white;
+      border: 1px solid lightgray;
+      height: 70%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center;
+      .divideLine {
+        display: flex;
+        width: 14vw;
+        flex-basis: row;
+        justify-content: space-between;
+        align-items: center;
+        color: rgb(142, 142, 142);
+        div {
+          background: rgb(219, 219, 219);
+          height: 1px;
+          width: 40%;
+        }
+      }
+      button {
+        width: 14vw;
+        color: white;
+        font-weight: 700;
+        cursor: pointer;
+        background: orange;
+        padding: 0.25vw;
+        border-width: 0;
+        border-radius: 5px;
+      }
+      img {
+        width: 10vw;
+        height: auto;
+      }
+      label,
+      input {
+        margin-left: 0.3vw;
+        height: 2vh;
+      }
+      label {
+        color: rgb(129, 129, 129);
+      }
+      input:focus-visible {
+        border-width: 0 !important;
+      }
+      .acountClass {
+        flex-direction: column;
+      }
+      .pwdClass {
+        flex-direction: row;
+        align-items: stretch;
+        justify-content: space-between;
+        div {
+          display: flex;
+          width: 83.3%;
+          flex-direction: column;
+        }
+        div:nth-child(2) {
+          display: flex;
+          width: 16.6%;
+          height: 100%;
+          background-color: rgb(250, 250, 250);
+          align-items: center;
+          justify-content: center;
+          span {
+            font-size: 1.5vh;
+            font-weight: 700;
+            cursor: pointer;
+            align-self: center;
+            background: transparent;
+          }
+        }
+      }
+  
+      .commonClass {
+        padding: 5px 20px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        .registerSpan {
+          width: 30%;
+          display: inline-flex;
+        }
+        input {
+          width: 60%;
+          display: inline-flex;
+        }
+        button {
+          width: 30%;
+          height: 10%;
+          margin: 0 1vw;
+        }
+      }
+    }
+  }
+  .footer {
+    font-size: smaller;
+    color: rgb(129, 129, 129);
+    height: 8vh;
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      height: 4vh;
+      span {
+        margin: 0 0.5vw;
+        cursor: pointer;
+      }
+    }
+    div:last-child {
+      width: 16vw;
+      justify-content: space-between;
+      display: flex;
+      flex-direction: row;
+      select {
+        border-width: 0;
+        background: transparent;
+        color: rgb(129, 129, 129);
+      }
+    }
+  }
+  

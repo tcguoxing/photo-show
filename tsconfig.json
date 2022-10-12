@@ -1,0 +1,15 @@
+{
+  "files": [],
+  "references": [ // 能把项目分成好几部分
+    {
+      "path": "./tsconfig.config.json"
+    },
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.vitest.json"
+    }
+  ]
+}
+
