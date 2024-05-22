@@ -46,76 +46,42 @@
               </div>
             </div>
             <button @click="login">登录</button>
-            <div class="divideLine roundClass">
-              <div></div>
-              <span>或</span>
-              <div></div>
-            </div>
-            <div class="roundClass linkClass">
-              <img src="../../assets/sample/logo/wechat.png" alt="" />
-              <a href="https://wx.qq.com/">使用微信登录</a>
-            </div>
-            <div class="forgetClass">
-              <a href="https://wx.qq.com/">忘记密码了？</a>
-            </div>
-          </div>
-          <div class="middle">
-            <span>没有账户?</span>
-            <a href="https://www.baidu.com/">注册</a>
-          </div>
-          <div class="down">
-            <span>下载应用</span>
-            <div>
-              <img src="@/assets/sample/logo/AppStore.png" />
-              <img src="@/assets/sample/logo/GooglePlay.png" />
-            </div>
+
           </div>
         </div>
       </div>
     </div>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref, onMounted } from 'vue'
+<script setup lang="ts">
+import { ref, reactive } from 'vue'
 import { useRouter, useRoute } from 'vue-router';
 
-export default defineComponent( {
-  name: "loginPage",
-  setup() {
-    const router = useRouter()
-    const route = useRoute()
 
-    const id = ref("tcguoxing");
-    const mainDiv = ref(null)
-    const password = ref("********");
-    const pwdHidden = ref(true);
-    onMounted(() => {console.log('this mainDiv: ', mainDiv)})
+const router = useRouter()
+const route = useRoute()
 
-    const login = function () {
-      // console.log('typeof lazyLog: ', typeof this.$log());
-      router.push({
-        path: "loginWelcome",
-        query: { id: id.value  },
-      });
-    };
-    const register = function() {
-      router.push({
-        path: "register",
-        query: { name: "register" },
-      });
-      // alert('no use')
-    };
-    const mentionInfo = function () {
-      alert("comming soon");
-    };
-    const showPwd = function () {
-      pwdHidden.value = !pwdHidden.value;
-    };
-    return {
-      id, password, pwdHidden, login, register, mentionInfo, showPwd, mainDiv
-    }
-  },
-})
+  const id = ref("xiangshoudexiaowu");
+  const reactiveId = reactive(id)
+  const mainDiv = ref(null)
+  const password = ref("********");
+  const pwdHidden = ref(true);
+
+  const login = function () {
+    const mentionInfo = [
+      '这账号不对！',
+      '没有这个账号。',
+      '跟你说了，账号错啦！',
+      '还点登录，账号都错了！',
+    ]
+    const info = mentionInfo[Math.floor(Math.random() * 4)] 
+    window.alert(info)
+  };
+
+  function showPwd () {
+    pwdHidden.value = !pwdHidden.value;
+  };
+    
 </script>
 <style lang="less" scoped>
 .main {
@@ -153,7 +119,7 @@ export default defineComponent( {
       align-self: center;
       div[subDiv] {
         position: relative;
-        top: 25px;
+        top: 26px;
         left: 112px;
       }
       img[animateImg] {
@@ -255,9 +221,10 @@ export default defineComponent( {
     flex-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
+    // background: red;
     .rightPart {
       width: 70%;
-      height: 90%;
+      height: 60%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -266,7 +233,7 @@ export default defineComponent( {
         width: 100%;
         background: white;
         border: 1px solid lightgray;
-        height: 60%;
+        height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
