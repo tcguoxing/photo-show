@@ -1,5 +1,5 @@
 <template>
-  <div class="main">
+  <div ref="mainDiv" class="main">
     <div class="body">
       <div class="leftPart">
         <div id="phoneCartoon" class="mainDiv">
@@ -27,149 +27,91 @@
         </div>
         <!-- <img src="../../imgs/zhouguanyu.png" alt="从Instagram上爬取的图片" /> -->
       </div>
-      <div class="rightPart">
-        <div class="upper">
-          <img thisImg src="@/assets/Photoshow.png" />
-          <div class="acountClass roundClass borderClass">
-            <label>手机号、账号或邮箱</label>
-            <input id="idInput" type="text" v-model="id" />
-          </div>
-          <div class="pwdClass roundClass borderClass">
-            <div>
-              <label>密码</label>
-              <input type="password" v-model="password" />
+      <div right>
+        <div class="rightPart">
+          <div class="upper">
+            <img thisImg src="@/assets/Photoshow.png" />
+            <div class="acountClass roundClass borderClass">
+              <label>手机号、账号或邮箱</label>
+              <input id="idInput" type="text" v-model="id" />
             </div>
-            <div>
-              <span v-if="pwdHidden" @click="showPwd">显示</span>
-              <span v-else @click="showPwd">隐藏</span>
+            <div class="pwdClass roundClass borderClass">
+              <div>
+                <label>密码</label>
+                <input type="password" v-model="password" />
+              </div>
+              <div>
+                <span v-if="pwdHidden" @click="showPwd">显示</span>
+                <span v-else @click="showPwd">隐藏</span>
+              </div>
             </div>
-          </div>
-          <button @click="login">登录</button>
-          <div class="divideLine roundClass">
-            <div></div>
-            <span>或</span>
-            <div></div>
-          </div>
-          <div class="roundClass linkClass">
-            <img src="../../assets/sample/logo/wechat.png" alt="" />
-            <a href="https://wx.qq.com/">使用微信登录</a>
-          </div>
-          <div class="forgetClass">
-            <a href="https://wx.qq.com/">忘记密码了？</a>
+            <button @click="login">登录</button>
+
           </div>
         </div>
-        <div class="middle">
-          <span>没有账户?</span>
-          <a href="https://www.baidu.com/">注册</a>
-        </div>
-        <div class="down">
-          <span>下载应用</span>
-          <div>
-            <img src="@/assets/sample/logo/AppStore.png" />
-            <img src="@/assets/sample/logo/GooglePlay.png" />
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="footer">
-      <div class="buttons">
-        <span @click="mentionInfo">Xdxn</span>
-        <span @click="mentionInfo">关于</span>
-        <span @click="mentionInfo">博客</span>
-        <span @click="mentionInfo">工作</span>
-        <span @click="mentionInfo">帮助</span>
-        <span @click="mentionInfo">API</span>
-        <span @click="mentionInfo">隐私</span>
-        <span @click="mentionInfo">条款</span>
-        <span @click="mentionInfo">热门账户</span>
-        <span @click="mentionInfo">话题标签</span>
-        <span @click="mentionInfo">地点</span>
-        <span @click="mentionInfo">Photoshow Life</span>
-        <span @click="mentionInfo">舞蹈</span>
-        <span @click="mentionInfo">美食靓饮</span>
-        <span @click="mentionInfo">家居园艺</span>
-        <span @click="mentionInfo">音乐</span>
-        <span @click="mentionInfo">视觉艺术</span>
-      </div>
-      <div>
-        <select name="language">
-          <option value="zh">中文（简体）</option>
-          <option value="cht">中文（繁体）</option>
-          <option value="en">English</option>
-        </select>
-        <span>2022Photoshow from Xdxn</span>
       </div>
     </div>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script setup lang="ts">
+import { ref, reactive } from 'vue'
 import { useRouter, useRoute } from 'vue-router';
 
-export default defineComponent( {
-  name: "loginPage",
-  setup() {
-    const router = useRouter()
-    const route = useRoute()
 
-    const id = ref("tcguoxing");
-    const password = ref("********");
-    const pwdHidden = ref(true);
+const router = useRouter()
+const route = useRoute()
 
-    const login = function () {
-      // console.log('typeof lazyLog: ', typeof this.$log());
-      router.push({
-        path: "loginWelcome",
-        query: { id: id.value  },
-      });
-    };
-    const register = function() {
-      router.push({
-        path: "register",
-        query: { name: "register" },
-      });
-      // alert('no use')
-    };
-    const mentionInfo = function () {
-      alert("comming soon");
-    };
-    const showPwd = function () {
-      pwdHidden.value = !pwdHidden.value;
-    };
-    return {
-      id, password, pwdHidden, login, register, mentionInfo, showPwd
-    }
-  },
-})
+  const id = ref("xiangshoudexiaowu");
+  const reactiveId = reactive(id)
+  const mainDiv = ref(null)
+  const password = ref("********");
+  const pwdHidden = ref(true);
+
+  const login = function () {
+    const mentionInfo = [
+      '这账号不对！',
+      '没有这个账号。',
+      '跟你说了，账号错啦！',
+      '还点登录，账号都错了！',
+    ]
+    const info = mentionInfo[Math.floor(Math.random() * 4)] 
+    window.alert(info)
+  };
+
+  function showPwd () {
+    pwdHidden.value = !pwdHidden.value;
+  };
+    
 </script>
 <style lang="less" scoped>
 .main {
     align-self: center;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     width: 60vw;
-    height: 80vh;
+    height: 100vh;
   }
   .body {
-    width: 40vw;
-    height: 65vh;
+    width: fit-content;
+    height: fit-content;
     margin-top: 0vh;
     align-self: center;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
+    justify-content: flex-start;
   }
   .leftPart {
     display: inline-block;
-    width: 45%;
-    height: 100%;
-    margin-right: 8%;
+    width: fit-content;
+    height: fit-content;
     .mainDiv {
+      margin-right: -60px;
       background-image: url(../assets/sample/loginPage/base.png);
-      background-size: 468.32px 634.15px;
+      background-size: cover;
+      background-repeat: no-repeat;
       height: 634.15px;
       width: 468.32px;
       background-position: -46px 0;
@@ -177,7 +119,7 @@ export default defineComponent( {
       align-self: center;
       div[subDiv] {
         position: relative;
-        top: 25px;
+        top: 26px;
         left: 112px;
       }
       img[animateImg] {
@@ -247,18 +189,6 @@ export default defineComponent( {
         75% {opacity: 1; z-index: 100;}
         100% {opacity: 0; z-index: 1;}
       }
-      // .from {
-      //   opacity: 0;
-      //   -webkit-transition: opacity 1.5s ease-out;
-      //   transition: opacity 1.5s ease-out;
-      //   visibility: visible;
-      // }
-      // .to { 
-      //   opacity: 1;
-      //   -webkit-transition: opacity 1.5s ease-in;
-      //   transition: opacity 1.5s ease-in;
-      //   z-index: 2;
-      // }
     }
   }
   input {
@@ -267,7 +197,7 @@ export default defineComponent( {
   }
   .roundClass {
     font-size: x-small;
-    width: 14vw;
+    width: 90%;
     display: flex;
   }
   .borderClass {
@@ -284,163 +214,173 @@ export default defineComponent( {
       text-decoration: none;
     }
   }
-  .rightPart {
-    width: 45%;
-    height: 90%;
+  div[right] {
+    height: 634.15px;
+    width: 468.32px;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    .upper {
-      width: 100%;
-      background: white;
-      border: 1px solid lightgray;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    // background: red;
+    .rightPart {
+      width: 70%;
       height: 60%;
       display: flex;
       flex-direction: column;
-      justify-content: space-around;
+      justify-content: space-between;
       align-items: center;
-      .divideLine {
+      .upper {
+        width: 100%;
+        background: white;
+        border: 1px solid lightgray;
+        height: 100%;
         display: flex;
-        width: 14vw;
-        flex-basis: row;
-        justify-content: space-between;
+        flex-direction: column;
+        justify-content: space-around;
         align-items: center;
-        color: rgb(142, 142, 142);
-        div {
-          background: rgb(219, 219, 219);
-          height: 1px;
-          width: 40%;
+        .divideLine {
+          display: flex;
+          width: 90%;
+          flex-basis: row;
+          justify-content: space-between;
+          align-items: center;
+          color: rgb(142, 142, 142);
+          div {
+            background: rgb(219, 219, 219);
+            height: 1px;
+            width: 40%;
+          }
         }
-      }
-      button {
-        width: 14vw;
-        color: white;
-        font-weight: 700;
-        cursor: pointer;
-        background: orange;
-        padding: 0.25vw;
-        border-width: 0;
-        border-radius: 5px;
-      }
-  
-      img[thisImg] {
-        height: 6vh;
-        margin: 1vh 0vh;
-      }
-      .linkClass {
-        height: 2vh;
-        justify-content: center;
-        align-items: stretch;
-          img {
-          width: 2vh !important;
-          margin: 0 1vh;
-        }
-        a {
-          text-decoration: none;
+        button {
+          width: 90%;
+          color: white;
           font-weight: 700;
           cursor: pointer;
+          background: orange;
+          padding: 0.25vw;
+          border-width: 0;
+          border-radius: 5px;
         }
-      }
-      label,
-      input {
-        margin-left: 0.3vw;
-        height: 2vh;
-      }
-      label {
-        color: rgb(129, 129, 129);
-      }
-      input:focus-visible {
-        border-width: 0 !important;
-      }
-      .acountClass {
-        flex-direction: column;
-      }
-      .pwdClass {
-        flex-direction: row;
-        align-items: stretch;
-        justify-content: space-between;
-        div {
-          display: flex;
-          width: 83.3%;
-          flex-direction: column;
+    
+        img[thisImg] {
+          height: 6vh;
+          margin: 1vh 0vh;
         }
-        div:nth-child(2) {
-          display: flex;
-          width: 16.6%;
-          height: 100%;
-          background-color: rgb(250, 250, 250);
-          align-items: center;
+        .linkClass {
+          height: 2vh;
           justify-content: center;
-          span {
-            font-size: 1.5vh;
+          align-items: stretch;
+            img {
+            width: 2vh !important;
+            margin: 0 1vh;
+          }
+          a {
+            text-decoration: none;
             font-weight: 700;
             cursor: pointer;
-            align-self: center;
-            background: transparent;
+          }
+        }
+        label,
+        input {
+          margin-left: 0.3vw;
+          height: 2vh;
+        }
+        label {
+          color: rgb(129, 129, 129);
+        }
+        input:focus-visible {
+          border-width: 0 !important;
+        }
+        .acountClass {
+          flex-direction: column;
+        }
+        .pwdClass {
+          flex-direction: row;
+          align-items: stretch;
+          justify-content: space-between;
+          div {
+            display: flex;
+            width: 83.3%;
+            flex-direction: column;
+          }
+          div:nth-child(2) {
+            display: flex;
+            width: 16.6%;
+            height: 100%;
+            background-color: rgb(250, 250, 250);
+            align-items: center;
+            justify-content: center;
+            span {
+              font-size: 1.5vh;
+              font-weight: 700;
+              cursor: pointer;
+              align-self: center;
+              background: transparent;
+            }
+          }
+        }
+    
+        .commonClass {
+          padding: 5px 20px;
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          .registerSpan {
+            width: 30%;
+            display: inline-flex;
+          }
+          input {
+            width: 60%;
+            display: inline-flex;
+          }
+          button {
+            width: 30%;
+            height: 10%;
+            margin: 0 1vw;
           }
         }
       }
-  
-      .commonClass {
-        padding: 5px 20px;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        .registerSpan {
-          width: 30%;
-          display: inline-flex;
-        }
-        input {
-          width: 60%;
-          display: inline-flex;
-        }
-        button {
-          width: 30%;
-          height: 10%;
-          margin: 0 1vw;
-        }
-      }
-    }
-    .middle {
-      width: 100%;
-      height: 13%;
-      border: 1px solid lightgray;
-      background: white;
-      display: flex; 
-      justify-content: center;
-      align-items: center;
-      * {
-        margin: 0 1%;
-      }
-      a {
-        text-decoration: none;
-        color: rgb(39, 134, 245);
-        font-weight: 600;
-      }
-    }
-    .down {
-      height: 15%;
-      width: 100%;
-      margin: 2vh 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      div {
-        display: flex;
-        margin: 2vh 0;
-        width: auto;
+      .middle {
+        width: 100%;
+        height: 13%;
+        border: 1px solid lightgray;
+        background: white;
+        display: flex; 
         justify-content: center;
         align-items: center;
         * {
-          width: 43%;
-          margin: 1vh;
+          margin: 0 1%;
+        }
+        a {
+          text-decoration: none;
+          color: rgb(39, 134, 245);
+          font-weight: 600;
+        }
+      }
+      .down {
+        height: 15%;
+        width: 100%;
+        margin: 2vh 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        div {
+          display: flex;
+          margin: 2vh 0;
+          width: auto;
+          justify-content: center;
+          align-items: center;
+          * {
+            width: 43%;
+            margin: 1vh;
+          }
         }
       }
     }
   }
+
   .footer {
     font-size: 12px;
     color: rgb(129, 129, 129);
