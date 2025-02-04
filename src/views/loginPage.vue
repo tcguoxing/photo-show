@@ -32,7 +32,7 @@
           <div class="upper">
             <img thisImg src="@/assets/Photoshow.png" />
             <div class="acountClass roundClass borderClass">
-              <label>手机号、账号或邮箱</label>
+              <label>账号</label>
               <input id="idInput" type="text" v-model="id" />
             </div>
             <div class="pwdClass roundClass borderClass">
@@ -45,8 +45,7 @@
                 <span v-else @click="showPwd">隐藏</span>
               </div>
             </div>
-            <button @click="login">登录</button>
-
+            <button @click="userLogin">登录</button>
           </div>
         </div>
       </div>
@@ -54,8 +53,11 @@
   </div>
 </template>
 <script setup lang="ts">
+import { encryptAndHashPassword } from '@/utils/encrypt'
+import { login } from '@/api/login';
 import { ref, reactive } from 'vue'
 import { useRouter, useRoute } from 'vue-router';
+
 
 
 const router = useRouter()
@@ -67,16 +69,34 @@ const route = useRoute()
   const password = ref("********");
   const pwdHidden = ref(true);
 
-  const login = function () {
-    const mentionInfo = [
-      '这账号不对！',
-      '没有这个账号。',
-      '跟你说了，账号错啦！',
-      '还点登录，账号都错了！',
-    ]
-    const info = mentionInfo[Math.floor(Math.random() * 4)] 
-    window.alert(info)
-  };
+  const userLogin = function () {
+    // const mentionInfo = [
+    //   '这账号不对！',
+    //   '没有这个账号。',
+    //   '跟你说了，账号错啦！',
+    //   '还点登录，账号都错了！',
+    // ]
+    // const info = mentionInfo[Math.floor(Math.random() * 4)] 
+    // window.alert(info)
+
+    // 假设使用了某个加密库（如 CryptoJS 或 Web Crypto API）
+    const plainPassword = password.value;
+
+    let encryptPassword = encryptAndHashPassword(plainPassword)
+
+    // // 使用非对称加密（如 RSA）加密密码
+    // const encryptedPassword = encryptWithPublicKey(plainPassword, publicKey);
+
+    // // 使用哈希算法（如 bcrypt）对密码进行哈希处理
+    // const hashedPassword = hashPassword(encryptedPassword);
+
+        login({
+          account_name: reactiveId.value,
+          password: password.value
+        }).then(res => {
+          console.log('login info: ', res)
+        })
+      };
 
   function showPwd () {
     pwdHidden.value = !pwdHidden.value;

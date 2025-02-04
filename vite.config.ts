@@ -12,7 +12,17 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
       // '@views': fileURLToPath(new URL('./src/views', import.meta.url))
     }
-  }
+  },
+  server: {
+    proxy: {
+      // 代理规则
+      '/dev': {
+        target: 'http://localhost:3000', // 目标服务器地址
+        changeOrigin: true, // 是否改变请求源
+        rewrite: (path) => path.replace(/^\/dev/, ''), // 重写请求路径
+      },
+    },
+  },
 })
 // export default defineConfig(({ command, mode, ssrBuild }) => {
 //   if (command === 'serve') {

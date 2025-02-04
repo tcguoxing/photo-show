@@ -2,9 +2,9 @@
   "extends": "./tsconfig.app.json", // 继承了tsconfig.app.json的设置
   "exclude": [],
   "compilerOptions": {
-    "allowJs": true,
-    "composite": true,
-    "lib": [],
-    "types": ["node", "jsdom"]
+    "allowJs": true,// 全部注释
+    "composite": true,// 全部注释
+    "lib": [],// 全部注释
+    "types": ["node", "jsdom"]// 全部注释
   }
 }
