@@ -46,18 +46,21 @@
               </div>
             </div>
             <button @click="userLogin">登录</button>
+            <el-button type="text" @click="userCreate">注册</el-button>
           </div>
         </div>
       </div>
     </div>
+    <el-dialog>
+
+    </el-dialog>
   </div>
 </template>
 <script setup lang="ts">
-import { encryptAndHashPassword } from '@/utils/encrypt'
-import { login } from '@/api/login';
+import { encryptPassword } from '@/utils/encrypt'
+import { login } from '@/api/user';
 import { ref, reactive } from 'vue'
 import { useRouter, useRoute } from 'vue-router';
-
 
 
 const router = useRouter()
@@ -66,37 +69,35 @@ const route = useRoute()
   const id = ref("xiangshoudexiaowu");
   const reactiveId = reactive(id)
   const mainDiv = ref(null)
-  const password = ref("********");
+  const password = ref("123");
   const pwdHidden = ref(true);
+  const createDialog = ref(false)
 
   const userLogin = function () {
-    // const mentionInfo = [
-    //   '这账号不对！',
-    //   '没有这个账号。',
-    //   '跟你说了，账号错啦！',
-    //   '还点登录，账号都错了！',
-    // ]
-    // const info = mentionInfo[Math.floor(Math.random() * 4)] 
-    // window.alert(info)
-
     // 假设使用了某个加密库（如 CryptoJS 或 Web Crypto API）
     const plainPassword = password.value;
 
-    let encryptPassword = encryptAndHashPassword(plainPassword)
+    let encryptedPassword = encryptPassword(plainPassword)
+    // 需要保证每次提交加密后的明文对方看的不一样；
 
     // // 使用非对称加密（如 RSA）加密密码
     // const encryptedPassword = encryptWithPublicKey(plainPassword, publicKey);
 
     // // 使用哈希算法（如 bcrypt）对密码进行哈希处理
     // const hashedPassword = hashPassword(encryptedPassword);
+    console.log('password: ', encryptedPassword)
 
-        login({
-          account_name: reactiveId.value,
-          password: password.value
-        }).then(res => {
-          console.log('login info: ', res)
-        })
-      };
+    login({
+      account_name: reactiveId.value,
+      password: encryptedPassword
+    }).then(res => {
+      console.log('login info: ', res)
+    })
+  };
+
+  const userCreate = function () {
+
+  }
 
   function showPwd () {
     pwdHidden.value = !pwdHidden.value;
@@ -433,3 +434,4 @@ const route = useRoute()
     }
   }
 </style>
+
